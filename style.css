@@ -1,27 +1,92 @@
 body {
-    background-color: #f2f2f2;
-    color: #333;
     font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-#container {
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 960px;
-    max-height: 960px;
+h1 {
+    margin: 20px;
 }
 
-.row {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+/* Button Styles */
+#buttons {
+    margin: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#resizing {
+    margin-top: 10px;
+}
+
+/* Grid Styles */
+#container {
+    margin: 20px auto;
+    display: grid;
+    position: relative;
+    gap: 1px;
+    width: 80vw;
+    height: 80vw;
+    max-width: 800px;
+    max-height: 800px;
+    background-color: #ddd;
 }
 
 .cell {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    transition: background-color 0.1s;
+}
+
+/* Responsive Grid */
+@media (min-width: 768px) {
+    #container {
+        grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    #container {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    }
+}
+
+/* Hidden Resizing Options */
+#resizing {
+    display: none;
+}
+
+#footer {
+    height: 50px;
+    padding-top: 20px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }

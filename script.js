@@ -7,7 +7,7 @@ const resizeButton = document.getElementById('resize');
 const submitButton = document.getElementById('submit');
 const coloringButton = document.getElementById('coloring');
 const darkeningButton = document.getElementById('darkening');
-let colorTrack = 0;
+let colorTrack = -1;
 
 // Resizing div initially hidden
 resizing.style.display = 'none';
@@ -15,15 +15,13 @@ resizing.style.display = 'none';
 // Function to create grid
 function addGrid(gridSize) {
     container.innerHTML = ''; // Clear existing grid
-    for (let i=0; i<gridSize; i++) {
-        const row = document.createElement('div');
-        row.classList.add('row');
-        container.appendChild(row);
-        for (let j=0; j<gridSize; j++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            row.appendChild(cell);
-        }
+    container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    container.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+    for(let i=0; i<gridSize * gridSize; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.style.backgroundColor = 'white';
+        container.appendChild(cell);
     }
 }
 
@@ -33,7 +31,7 @@ function handleMouseOver(e) {
         if (colorTrack === 0) {
             const randomColor = Math.floor(Math.random()*16777215).toString(16);
             e.target.style.backgroundColor = '#' + randomColor;
-        } else {
+        } else if (colorTrack === 1) {
             let currentColor = e.target.style.backgroundColor;
             if (currentColor === 'white') {
                 e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
@@ -44,8 +42,7 @@ function handleMouseOver(e) {
                     e.target.style.backgroundColor = currentColor.slice(0, -4) + currentAlpha + ')';
                 }
             }
-        }
-        
+        } 
     }
 }
 
@@ -77,6 +74,7 @@ function handleColoringButton() {
     colorTrack = 0;
 }
 
+// Function to change grid function to darkening
 function handleDarkeningButton() {
     colorTrack = 1;
 }
